@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/backwhrite"
+    android:orientation="vertical"
+    tools:context=".DiyClass.DanSheBeiActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="#09C7F7"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/dl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="55%"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="50sp"
+            tools:layout_editor_absoluteX="164dp"
+            tools:layout_editor_absoluteY="29dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="90dp"
+            android:gravity="center"
+            android:text="剩余电量"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            tools:layout_editor_absoluteX="164dp"
+            tools:layout_editor_absoluteY="68dp" />
+
+        <TextView
+            android:id="@+id/danshebei_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:gravity="center"
+            android:text="更新于5月27日11:16"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            tools:layout_editor_absoluteX="127dp"
+            tools:layout_editor_absoluteY="87dp" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/DanSheBeilist"
+        android:layout_width="369dp"
+        android:layout_height="161dp"
+        android:layout_weight="7"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="106dp">
+
+
+    </ListView>
+
+    <Button
+        android:id="@+id/DanSheBei_shanchu"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn3"
+        android:focusable="false"
+        android:text="删除设备"
+        android:textStyle="italic"
+        android:textAlignment="center"
+        android:textColor="#ffff"
+        android:textSize="18sp" />
+</LinearLayout>

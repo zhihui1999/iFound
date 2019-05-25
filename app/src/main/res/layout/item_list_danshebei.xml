@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/danshebei_caidan"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="5dp"
+        android:text="功能"
+        android:textColor="#3C3C3C"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/danshebei_jieshi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/danshebei_xiangqing"
+        android:gravity="right"
+        android:layout_marginTop="7dp"
+        android:text="附属"
+        android:textColor="#808080"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/danshebei_xiangqing"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/danshebei_caidan"
+        android:src="@drawable/button_more"
+        android:layout_marginTop="10dp"
+        android:textColor="#808080"
+        android:textSize="24sp" />
+</RelativeLayout>

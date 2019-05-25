@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:scrollbars="vertical">
+
+	<!-- switch(布尔可写) -->
+
+
+	<!-- switch_gps(布尔可写) -->
+
+
+	<!-- switch_bluetooth(布尔可写) -->
+
+
+	<!-- alarm(布尔可写) -->
+
+
+	<!-- power(数值只读) -->
+
+
+	<!-- gps_signal(数值只读) -->
+
+
+	<!-- latitude(扩展可读) -->
+
+
+	<!-- longitude(扩展可读) -->
+
+
+	<!-- gpsTime(扩展可读) -->
+
+
+	<!-- beiJingTime(扩展可读) -->
+
+
+	<com.amap.api.maps.MapView
+		android:id="@+id/map"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@+id/line1">
+
+	</com.amap.api.maps.MapView>
+
+
+</LinearLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/chun"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".DiyClass.ChengYuanActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:text="成员管理"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="10dp"
+            app:srcCompat="@mipmap/akalin" />
+
+        <TextView
+            android:id="@+id/ChengYuan_guanli"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:text="管理员姓名"
+            android:textSize="15sp"
+            android:textColor="#9c9c9c"
+            android:layout_toRightOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/ChengYuan_glphone"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_marginTop="40dp"
+            android:text="177****7777"
+            android:textSize="13sp"
+            android:textColor="#9c9c9c"
+            android:layout_toRightOf="@+id/imageView" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="40dp"
+            android:layout_height="18dp"
+            android:layout_alignTop="@+id/ChengYuan_guanli"
+            android:layout_toEndOf="@+id/ChengYuan_guanli"
+            android:background="@drawable/btn"
+            android:text="管理员"
+            android:textSize="12sp"
+            android:textColor="#ffff"
+            android:layout_toRightOf="@+id/ChengYuan_guanli" />
+
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="310dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/xiugai" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:layout_marginLeft="10dp"
+        android:text="用户"
+        android:textColor="@color/gray"
+        android:textSize="18sp" />
+
+    <ListView
+        android:id="@+id/ChengYuanlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:divider="@color/config_progressview_color"
+        android:dividerHeight="1px"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/tv"
+        android:gravity="center"
+        android:text="添加新成员"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+</LinearLayout>
