@@ -1,6 +1,7 @@
 package com.gizwits.opensource.appkit.DiyClass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gizwits.opensource.appkit.R;
@@ -28,6 +30,7 @@ public class ChengYuanActivity extends AppCompatActivity implements AdapterView.
     private JSONObject jsonObject;
     private Handler handler=null;
     private String TAG = "网络";
+    private boolean kedian=false;//添加是否可以点
 
 
 
@@ -52,13 +55,31 @@ public class ChengYuanActivity extends AppCompatActivity implements AdapterView.
             }
         }).start();
 
-
+        TextView addchengyuan = (TextView) findViewById(R.id.addchengyuan);
+        addchengyuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (kedian){
+                    Intent intent = new Intent(ChengYuanActivity.this, DataBaseActivity.class);
+                    intent.putExtra("id", jsonObject.length()+1);//id
+                    intent.putExtra("type",1);//type 0 修改  1 增加
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(mContext, "请稍等再试", Toast.LENGTH_SHORT).show();   
+                }
+            }
+        });
 
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(this, "你点击了第" + (position + 1) + "项", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ChengYuanActivity.this, DataBaseActivity.class);
+        intent.putExtra("id", position+1);//id
+        intent.putExtra("type",0);//type 0 修改  1 增加
+        startActivity(intent);
+
     }
 
     @Override
@@ -92,6 +113,7 @@ public class ChengYuanActivity extends AppCompatActivity implements AdapterView.
                 }
             };
             handler.post(runnableUi);
+            kedian=true;
             //添加信息
 //            mData.add(new ChengYuan("赵志辉", "177****8115", R.drawable.cy1, R.drawable.xiugai));
 //            mData.add(new ChengYuan("张志遥", "177****8116", R.drawable.cy2, R.drawable.xiugai));

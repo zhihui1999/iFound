@@ -16,8 +16,8 @@ import java.util.Map;
  */
 public class HttpUtils {
     private static String addChengYuan = "http://www.520mylove.cn/chengyuan/addChengYuan.php";
-    private static String delectChengYuan = "http://www.520mylove.cn/chengyuan/delectChengYuan.php";
-    private static String updataChengYuan = "http://www.520mylove.cn/chengyuan/updataChengYuan.php";
+    private static String delectChengYuan = "http://www.520mylove.cn/chengyuan/deleteChengYuan.php";
+    private static String updataChengYuan = "http://www.520mylove.cn/chengyuan/updateChengYuan.php";
 
     private static URL url, addurl, delecturl, updataurl;
 
@@ -75,7 +75,6 @@ public class HttpUtils {
             connection.setUseCaches(false);
             //表示设置请求体的类型是文本类型
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
             connection.setRequestProperty("Content-Length", String.valueOf(mydata.length));
 
             connection.connect();   //连接，不写也可以。。？？有待了解
