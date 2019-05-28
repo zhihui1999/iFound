@@ -33,6 +33,7 @@
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/ChengYuan_name"
         android:background="@drawable/btn2"
+        android:focusable="false"
         android:text="群组成员"
         android:textColor="#ffff"
         android:textSize="12sp" />

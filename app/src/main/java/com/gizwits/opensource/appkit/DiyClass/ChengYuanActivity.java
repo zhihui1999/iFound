@@ -1,17 +1,21 @@
 package com.gizwits.opensource.appkit.DiyClass;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.gizwits.opensource.appkit.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,8 +24,13 @@ public class ChengYuanActivity extends AppCompatActivity implements AdapterView.
     private Context mContext;
     private ChengYuanAdapter mAdapter = null;
     private ListView list_chengyuan;
-    private MyDBOpenHelper myDBHelper;
-    private SQLiteDatabase db;
+    private String path = "http://www.520mylove.cn/chengyuan/select.php";
+    private JSONObject jsonObject;
+    private Handler handler=null;
+    private String TAG = "网络";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,40 +40,83 @@ public class ChengYuanActivity extends AppCompatActivity implements AdapterView.
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-
         mContext = getApplication();
-        myDBHelper = new MyDBOpenHelper(mContext,"my.db",null,1);//数据库
-        db=myDBHelper.getReadableDatabase();
-        StringBuilder sb = new StringBuilder();
-        Cursor cursor = db.query("person", null, null, null, null, null, null);
-        if (cursor.moveToFirst()) {
-            do {
-                int pid = cursor.getInt(cursor.getColumnIndex("id"));
-                String name = cursor.getString(cursor.getColumnIndex("name"));
-                String phone = cursor.getString(cursor.getColumnIndex("phone"));
-                sb.append("id：" + pid + "：" + name + "\n"+phone);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        Toast.makeText(mContext, sb.toString(), Toast.LENGTH_SHORT).show();
-//        Toast.makeText(mContext, "创建数据库了", Toast.LENGTH_SHORT).show();
+        handler=new Handler();
         list_chengyuan = (ListView) findViewById(R.id.ChengYuanlist);
         mData = new LinkedList<ChengYuan>();
-//添加信息
-        mData.add(new ChengYuan("赵志辉", "177****8115",R.drawable.cy1,R.drawable.xiugai));
-        mData.add(new ChengYuan("张志遥", "177****8116",R.drawable.cy2,R.drawable.xiugai));
-        mData.add(new ChengYuan("李昂", "177****8117",R.drawable.cy3,R.drawable.xiugai));
-        mData.add(new ChengYuan("魏东珣", "177****8118",R.drawable.cy4,R.drawable.xiugai));
-        mData.add(new ChengYuan("刘佳", "177****8117",R.drawable.cy5,R.drawable.xiugai));
-        mData.add(new ChengYuan("","",R.drawable.cy5,R.drawable.xiugai));
-        mAdapter = new ChengYuanAdapter((LinkedList<ChengYuan>) mData, mContext);
-        list_chengyuan.setAdapter(mAdapter);
-        list_chengyuan.setOnItemClickListener(this);
+        //获取数据库成员json数据,返回的jsonobject不为null则为获取成功
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GetWebInfo();
+            }
+        }).start();
+
+
+
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "你点击了第"+ (position+1) +"项", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "你点击了第" + (position + 1) + "项", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+
+    /**
+     * 添加数据刷新UI
+     */
+    void UpdataUI(JSONObject jsonObject) throws JSONException {
+        if (jsonObject == null || jsonObject.length() == 0) {
+            Log.d(TAG, "UpdataUI: jsonObject长度为0或者jsonObject=null");
+        } else {
+            Log.d(TAG, "UpdataUI: "+jsonObject.length());
+            for (int i = 0; jsonObject.length() > i; i++) {
+                String one = jsonObject.getString(String.valueOf(i));//取出每个成员信息
+                JSONObject onejson = new JSONObject(one);
+                mData.add(new ChengYuan(onejson.getString("name"), onejson.getString("phone"), R.drawable.cy1, R.drawable.xiugai));
+                Log.d(TAG, "UpdataUI: 1");
+            }
+            // 构建Runnable对象，在runnable中更新界面
+            Runnable  runnableUi=new  Runnable(){
+                @Override
+                public void run() {
+                    //更新界面
+                    mAdapter = new ChengYuanAdapter((LinkedList<ChengYuan>) mData, mContext);
+                    list_chengyuan.setAdapter(mAdapter);
+                    list_chengyuan.setOnItemClickListener(ChengYuanActivity.this);
+                }
+            };
+            handler.post(runnableUi);
+            //添加信息
+//            mData.add(new ChengYuan("赵志辉", "177****8115", R.drawable.cy1, R.drawable.xiugai));
+//            mData.add(new ChengYuan("张志遥", "177****8116", R.drawable.cy2, R.drawable.xiugai));
+//            mData.add(new ChengYuan("李昂", "177****8117", R.drawable.cy3, R.drawable.xiugai));
+//            mData.add(new ChengYuan("魏东珣", "177****8118", R.drawable.cy4, R.drawable.xiugai));
+//            mData.add(new ChengYuan("刘佳", "177****8117", R.drawable.cy5, R.drawable.xiugai));
+
+        }
+
+    }
+
+    void GetWebInfo(){
+        try {
+            String htmlContent = HtmlService.getHtml(path);
+            String xin = htmlContent.replace("\\/", "/");
+            Log.d(TAG, "run: " + xin);
+            jsonObject = new JSONObject(xin);
+            UpdataUI(jsonObject);
+        } catch (Exception e) {
+            jsonObject = null;
+            Log.d(TAG, "run:程序出现异常：" + e.toString());
+        }
+    }
+
+
 }
+
+

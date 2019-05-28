@@ -319,7 +319,8 @@
         <activity
             android:name=".DiyClass.DanSheBeiActivity"
             android:theme="@style/Theme.AppCompat" />
-        <activity android:name=".DiyClass.ChengYuanActivity"
+        <activity
+            android:name=".DiyClass.ChengYuanActivity"
             android:theme="@style/Theme.AppCompat" />
     </application>
 
